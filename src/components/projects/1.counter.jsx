@@ -3,15 +3,19 @@ import React, { useState } from "react";
 import { Plus, Minus, Undo2, Redo2 } from "lucide-react";
 
 function Counter() {
-  const [history, setHistory] = useState([0]);
-  const [position, setPosition] = useState(0);
+  // Increment counter when needed
+  // Decrement counter when needed
+  // Implement Undo and redo functionalities.
+
+  const [history, setHistory] = useState([0]); // Maintains the list of increment decrements done with respect to current value
+  const [position, setPosition] = useState(0); // to hold the index of latest item
   let currentValue = history[position];
 
   const AddValueToHistory = (newValue) => {
     const currentHistory = history.slice(0, position + 1);
     console.log("new hI", currentHistory);
     setHistory([...currentHistory, newValue]);
-    setPosition(position + 1); // increment the position on increment or decrement operation
+    setPosition(position + 1); //increment the position on increment or decrement operation
   };
 
   const increment = () => AddValueToHistory(currentValue + 1);
