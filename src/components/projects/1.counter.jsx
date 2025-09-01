@@ -17,7 +17,17 @@ function Counter() {
   const increment = () => AddValueToHistory(currentValue + 1);
   const decrement = () => AddValueToHistory(currentValue - 1);
 
-  console.log("history and position values----->>>", history, position);
+  const undo = () => {
+    if (position > 0) {
+      setPosition(position - 1);
+    }
+  };
+
+  const redo = () => {
+    if (position < history.length - 1) {
+      setPosition(position + 1);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center pt-[100px]">
@@ -35,14 +45,14 @@ function Counter() {
           </button>
         </div>
         <div className="flex gap-2 justify-center items-center">
-          <button>
+          <button disabled={position === 0} onClick={undo}>
             Undo <Undo2 className="h-4 w-4" />
           </button>
 
           <div className="text-sm text-muted-foreground">
             {position + 1}/{history.length}
           </div>
-          <button>
+          <button disabled={position === history.length - 1} onClick={redo}>
             Redo <Redo2 className="h-4 w-4" />
           </button>
         </div>
